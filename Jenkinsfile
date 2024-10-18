@@ -49,8 +49,7 @@ pipeline {
 
 		}
 	}
-    }
-	stage('SonarQube Analsyis') {
+	    stage('SonarQube Analsyis') {
       tools{
       jdk 'jdk17'
     }
@@ -64,6 +63,8 @@ pipeline {
                     }
                 }
             }
+    }
+	
 
     post {
         always {
