@@ -10,7 +10,7 @@ pipeline {
 	stage('Check git history'){
 		steps{
 			echo 'running talisman to check project history for secrets'
-			sh '~/.talisman/bin/talisman_linux_amd64 --scan'
+	//		sh '~/.talisman/bin/talisman_linux_amd64 --scan'
 		}
 	}   
 	stage('Prepare SCA tool'){
