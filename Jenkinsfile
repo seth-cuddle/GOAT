@@ -41,7 +41,7 @@ pipeline {
                     }
                 }
             }
-    }
+    
 	stage('Package project') {
             steps {
 		    script{
@@ -64,7 +64,7 @@ pipeline {
 
 		}
 	}
-	    
+	}    
 	
 
     post {
