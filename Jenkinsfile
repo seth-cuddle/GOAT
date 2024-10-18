@@ -27,6 +27,21 @@ pipeline {
 			}
 		}
 	}
+	    stage('SonarQube Analsyis') {
+      tools{
+      jdk 'jdk17'
+    }
+      environment {
+            scannerHome = tool 'sonar' // the name you have given the Sonar Scanner (Global Tool Configuration)
+        }
+                steps {
+                    withSonarQubeEnv('sonar') {
+                        sh ''' $scannerHome/bin/sonar-scanner -Dsonar.projectName=goat -Dsonar.url=http://172.28.208.1:9000/ \
+                        -Dsonar.login=sqp_56b57a06fa1122ac82a586752726ea5b95a6e90c -Dsonar.projectKey=goat -Dsonar.java.binaries=. '''
+                    }
+                }
+            }
+    }
 	stage('Package project') {
             steps {
 		    script{
@@ -49,21 +64,7 @@ pipeline {
 
 		}
 	}
-	    stage('SonarQube Analsyis') {
-      tools{
-      jdk 'jdk17'
-    }
-      environment {
-            scannerHome = tool 'sonar' // the name you have given the Sonar Scanner (Global Tool Configuration)
-        }
-                steps {
-                    withSonarQubeEnv('sonar') {
-                        sh ''' $scannerHome/bin/sonar-scanner -Dsonar.projectName=Webapps -Dsonar.url=http://172.28.208.1:9000/ \
-                        -Dsonar.login=squ_e7bbf58f47b1bbafab0230566948dc32fd329618 -Dsonar.projectKey=Webapps -Dsonar.java.binaries=. '''
-                    }
-                }
-            }
-    }
+	    
 	
 
     post {
