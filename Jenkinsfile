@@ -50,6 +50,21 @@ pipeline {
 		}
 	}
     }
+	stage('SonarQube Analsyis') {
+      tools{
+      jdk 'jdk17'
+    }
+      environment {
+            scannerHome = tool 'sonar' // the name you have given the Sonar Scanner (Global Tool Configuration)
+        }
+                steps {
+                    withSonarQubeEnv('sonar') {
+                        sh ''' $scannerHome/bin/sonar-scanner -Dsonar.projectName=Webapps -Dsonar.url=http://172.28.208.1:9000/ \
+                        -Dsonar.login=squ_e7bbf58f47b1bbafab0230566948dc32fd329618 -Dsonar.projectKey=Webapps -Dsonar.java.binaries=. '''
+                    }
+                }
+            }
+
     post {
         always {
             echo 'This will always run'
