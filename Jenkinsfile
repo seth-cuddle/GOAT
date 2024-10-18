@@ -7,12 +7,12 @@ pipeline {
 			git 'https://github.com/ibmappsec/GOAT.git'
 		}
 	}
-//	stage('Check git history'){
-//		steps{
-//			echo 'running talisman to check project history for secrets'
-//			sh '~/.talisman/bin/talisman_linux_amd64 --scan'
-//		}
-//	}   
+	stage('Check git history'){
+		steps{
+			echo 'running talisman to check project history for secrets'
+			sh '~/.talisman/bin/talisman_linux_amd64 --scan'
+		}
+	}   
 	stage('Prepare SCA tool'){
 		steps {
 			script{				
@@ -20,8 +20,9 @@ pipeline {
 				if(exists){
 					echo 'already exists'
 				}else{
-					sh 'wget https://dl.bintray.com/jeremy-long/owasp/dependency-check-5.2.1-release.zip'
-					sh 'unzip dependency-check-5.2.1-release.zip'				
+					// sh 'wget https://dl.bintray.com/jeremy-long/owasp/dependency-check-5.2.1-release.zip'
+					//  sh 'unzip dependency-check-5.2.1-release.zip'	
+					dependencyCheck additionalArguments: ''' --scan ./ --format HTML ''', odcInstallation: 'DP-Check'
 				}
 			}
 		}
