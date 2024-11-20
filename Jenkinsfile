@@ -37,7 +37,7 @@ pipeline {
                 steps {
                     withSonarQubeEnv('sonar') {
                         sh ''' $scannerHome/bin/sonar-scanner -Dsonar.projectName=goat -Dsonar.url=http://172.28.208.1:9000/ \
-                        -Dsonar.login=sqp_f8af66297789daeb6492835d07a6d2acef1cdd8b  -Dsonar.projectKey=goat -Dsonar.java.binaries=. '''
+                        -Dsonar.login=sqp_b2261d6bb9e293ec434456cbf0e9ffa107d6c81a  -Dsonar.projectKey=goat -Dsonar.java.binaries=. '''
                     }
                 }
             }
